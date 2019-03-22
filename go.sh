@@ -14,13 +14,19 @@ EOF"
 sudo apt update #&& sudo apt upgrade -y
 sudo apt-get install cmake libfftw3-dev libmbedtls-dev libboost-program-options-dev libconfig++-dev libsctp-dev git -y
 sudo apt-get install libboost-system-dev libboost-test-dev libboost-thread-dev libqwt-dev libqt4-dev -y
+sudo apt-get install cmake g++ libpython-dev python-numpy swig -y
 
+cd
 #Lime SDR
-sudo add-apt-repository -y ppa:myriadrf/drivers
-sudo apt-get update
-sudo apt-get install limesuite liblimesuite-dev limesuite-udev limesuite-images -y
-sudo apt-get install soapysdr soapysdr-module-lms7 -y
-
+git clone https://github.com/pothosware/SoapySDR.git
+cd SoapySDR
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+sudo ldconfig
+###TEST lime###SoapySDRUtil --info
 ###TEST lime###SoapySDRUtil --probe
 
 cd
@@ -54,8 +60,3 @@ sudo srsepc
 #Terminal 2
 sudo srsenb
 EOF"
-
-
-
-
-
