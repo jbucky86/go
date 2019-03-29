@@ -46,6 +46,7 @@ cd
 #srsLTE
 git clone https://github.com/srsLTE/srsLTE.git
 cd srsLTE
+mkdir build
 cd build
 cmake ../
 make
