@@ -60,8 +60,6 @@ sudo apt-get -y install nextepc
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 curl -sL http://nextepc.org/static/webui/install | sudo -E bash -
 
-
-
 cd ~/srsLTE
 #cp srsepc/epc.conf.example srsepc/epc.conf
 #cp srsepc/user_db.csv.example srsepc/user_db.csv
@@ -120,6 +118,21 @@ diff -u /etc/nextepc/sgw.conf.old /etc/nextepc/sgw.conf
        addr: 127.0.0.2
      gtpu:
 +      addr: 127.0.0.2
+
+diff enb.conf.example enb.conf
+25,26c25,26
+< mcc = 001
+< mnc = 01
+---
+> mcc = 901
+> mnc = 70
+67c67,68
+< dl_earfcn = 3400
+---
+> #dl_earfcn = 3400
+> dl_earfcn = 1600
+74a76
+> device_args="clock=external"
 
 #restart nextepc
 sudo systemctl restart nextepc-mmed
