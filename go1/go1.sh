@@ -140,7 +140,7 @@ sudo systemctl restart nextepc-sgwd
 
 #if no internet on device
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
-sudo iptables -t nat -A POSTROUTING -o <'interface-name'> -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o enp1s0f0 -j MASQUERADE
 sudo iptables -I INPUT -i pgwtun -j ACCEPT
 
 #start srs
