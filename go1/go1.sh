@@ -27,20 +27,20 @@ cd ../udev-rules/
 sudo chmod +x install.sh
 sudo ./install.sh
 # Download board firmware
-sudo LimeUtil --update
+#sudo LimeUtil --update
 ###TEST lime###SoapySDRUtil --info
 ###TEST lime###SoapySDRUtil --probe
 
-#cd
-##srsGUI
-#git clone https://github.com/srsLTE/srsGUI.git
-#cd srsGUI
-#mkdir build
-#cd build
-#cmake ../
-#make
-#sudo make install
-#sudo ldconfig
+cd
+#srsGUI
+git clone https://github.com/srsLTE/srsGUI.git
+cd srsGUI
+mkdir build
+cd build
+cmake ../
+make
+sudo make install
+sudo ldconfig
 
 cd
 #srsLTE
@@ -54,20 +54,43 @@ make test
 sudo make install
 sudo ldconfig
 
-sudo add-apt-repository ppa:acetcom/nextepc
-sudo apt-get update
-sudo apt-get -y install nextepc
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-curl -sL http://nextepc.org/static/webui/install | sudo -E bash -
+#sudo add-apt-repository ppa:acetcom/nextepc
+#sudo apt-get update
+#sudo apt-get -y install nextepc
+#curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+#curl -sL http://nextepc.org/static/webui/install | sudo -E bash -
 
 cd ~/srsLTE
-#cp srsepc/epc.conf.example srsepc/epc.conf
+cp srsepc/epc.conf.example srsepc/epc.conf
 #cp srsepc/user_db.csv.example srsepc/user_db.csv
 
 cp srsenb/enb.conf.example srsenb/enb.conf
 cp srsenb/rr.conf.example srsenb/rr.conf
 cp srsenb/sib.conf.example srsenb/sib.conf
 cp srsenb/drb.conf.example srsenb/drb.conf
+
+cd ~/srsLTE/srsepc
+sudo su
+./srslte_if_masq.sh enp1s0f0 
+
+cd
+sudo /bin/sh -c "cat <<EOF > ~/srsepc/user_db.csv
+#
+# .csv to store UEs information in HSS
+#
+# Name:    Human readable name to help distinguish UEs. Ignored by the HSS
+# IMSI:    UEs IMSI value
+# Key:     UEs key, where other keys are derived from. Stored in hexadecimal
+# OP_Type: Operators code type, either OP or OPc
+# OP/OPc:  Operator Code/Cyphered Operator Code, stored in hexadecimal
+# AMF:     Authentication management field, stored in hexadecimal
+# SQN:     UEs Sequence number for freshness of the authentication
+# QCI:     QoS Class Identifier for the UEs default bearer.
+#
+# Note Lines starting by # are ignored and will be overwritten
+ue1,001010123456789,00112233445566778899aabbccddeeff,opc,63bfa50ee6523365ff14c1f45f88737d,9001,000000001234,7
+ue2,001010123456780,00112233445566778899aabbccddeeff,opc,63bfa50ee6523365ff14c1f45f88737d,8000,000000001234,7
+EOF"
 
 cd
 sudo /bin/sh -c "cat <<EOF > ~/Desktop/start_srsLTE.txt
