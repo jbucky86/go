@@ -1,0 +1,18 @@
+sudo add-apt-repository -y ppa:myriadrf/drivers
+sudo add-apt-repository -y ppa:pothosware/framework
+sudo add-apt-repository -y ppa:pothosware/support
+sudo add-apt-repository -y ppa:myriadrf/drivers
+sudo apt-get update
+sudo apt-get install -y pothos-all
+sudo apt-get install -y python-pothos
+sudo apt-get install -y python3-pothossudo 
+sudo apt-get install -y pothos-python-dev
+sudo apt-get install -y soapysdr-tools 
+sudo apt-get install -y python-soapysdr python-numpy
+sudo apt-get install -y python3-soapysdr python3-numpy
+sudo apt-get install -y soapysdr-module-remote soapysdr-server
+sudo apt remove -y limesdr0.6-module-audio
+sudo apt install -y soapysdr-module-all\
+sudo apt-get install -y limesuite liblimesuite-dev limesuite-udev limesuite-images
+sudo apt-get install -y soapysdr soapysdr-module-lms7
+sudo apt-get install libsoapysdr-dev
